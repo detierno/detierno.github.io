@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: http://detierno.github.io/sitemap.xml 

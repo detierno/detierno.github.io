@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Ruby | coding life]]></title>
+  <link href="http://detierno.github.io/blog/categories/ruby/atom.xml" rel="self"/>
+  <link href="http://detierno.github.io/"/>
+  <updated>2014-08-29T14:21:37-03:00</updated>
+  <id>http://detierno.github.io/</id>
+  <author>
+    <name><![CDATA[Denis Antoniazzi Tierno]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Self E O Interpretador Ruby]]></title>
+    <link href="http://detierno.github.io/blog/2014/08/28/self-e-o-interpretador-ruby/"/>
+    <updated>2014-08-28T23:34:00-03:00</updated>
+    <id>http://detierno.github.io/blog/2014/08/28/self-e-o-interpretador-ruby</id>
+    <content type="html"><![CDATA[<p>Ao iniciar com ruby me deparei com um conceito importante e que, por muito tempo, permaneceu como mistério para mim. Falo do <strong>self</strong> e do entendimento de como o interpretador ruby se comporta.</p>
+
+<p>É de grande importancia conseguirmos entender qual objeto esta em foco em cada linha de código que lemos ou seja, entender quem é o objeto em questão, entender quem é o <strong>self</strong>. Para ilustrar a explicação tome como base o código a seguir e tente adivinhar qual a saída da execução do mesmo.</p>
+
+<pre><code class="ruby">p self
+
+class Human
+  p self
+  def walk(steps)
+    p self
+    @steps = steps
+    run
+  end
+
+  def run
+    p self
+    p "start run after #{@steps} steps"
+  end
+  p self
+end
+
+me = Human.new
+me.walk(4)
+
+p self
+</code></pre>
+
+<p>Ao executar esse código o resultado seria algo parecido com:</p>
+
+<pre><code class="text">  main
+  Human
+  Human
+  #&lt;Human:0x007fec31031068&gt;
+  #&lt;Human:0x007fec31031068 @steps=4&gt;
+  "start run after 4 steps"
+  main
+</code></pre>
+
+<p>Se você entendeu a saída do exemplo provavelmente não precisa continuar a leitura desse post, mas para quem não conseguiu captar vamos a explicação. Nada melhor do que explicar linha a linha:</p>
+
+<pre><code class="ruby">p self # =&gt; 1 - main
+# main é um objeto que o ruby cria (instância da classe Object)
+# para evitar que se tenha um contexto vazio, assim é possível
+# chamar o self em qualquer situação
+
+class Human
+  p self # =&gt; 2 - Human
+  # Aqui o interpretador já entrou na classe e o self passa a ser a própria classe
+
+  # A seguir o interpretador irá ler os métodos walk() e run()
+  # mas não irá imprimir os selfs existentes pois como os métodos
+  # não são executados ainda o intepretador somente adiciona estes
+  # métodos na chamada method table
+  # (responsável por guardar os métodos de instância da classe)
+  def walk(steps)
+    p self
+    @steps = steps
+    run
+  end
+
+  def run
+    p self
+    p "start run after #{@steps} steps"
+  end
+
+  # Após adicionar os métodos novamente pedimos para imprimir
+  # o self que continua apontando para a própria classe
+  p self # =&gt; 3 - Human
+end
+
+me = Human.new
+
+# Ao chamar o método walk() o self agora irá apontar
+# para a instância 'me' da classe Human e após atribuir
+# uma variável de instância e chamarmos o método run() o self
+#continua apontando para a mesma instância 'me', agora com a variável @steps definida
+
+me.walk(4)
+# =&gt; 4 - #&lt;Human:0x007fc52d0b38b8&gt;
+# =&gt; 5 - #&lt;Human:0x007fc52d0b38b8 @steps=4&gt;
+# =&gt; "start run after 4 steps"
+
+p self # =&gt; 6 - main
+# Novamente estamos fora da classe e o self passa a ser novamente o main
+</code></pre>
+
+<p>Espero que esse exemplo tenha esclarecido o misterioso <strong>self</strong> e até a próxima.</p>
+]]></content>
+  </entry>
+  
+</feed>

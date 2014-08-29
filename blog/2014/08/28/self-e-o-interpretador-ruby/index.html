@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>coding life</title>
+  <title>Self E O Interpretador Ruby - coding life</title>
   <meta name="author" content="Denis Antoniazzi Tierno">
 
   
@@ -19,7 +19,7 @@
 
   
   <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400,700' rel='stylesheet' type='text/css'>
-  <link rel="canonical" href="http://detierno.github.io">
+  <link rel="canonical" href="http://detierno.github.io/blog/2014/08/28/self-e-o-interpretador-ruby">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="coding life" type="application/atom+xml">
@@ -54,15 +54,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/08/28/self-e-o-interpretador-ruby/">Self E O Interpretador Ruby</a></h1>
+      <h1 class="entry-title">Self E O Interpretador Ruby</h1>
     
     
       <p class="meta">
@@ -78,11 +75,11 @@
   </header>
 
 
-  <div class="entry-content"><p>Ao iniciar com ruby me deparei com um conceito importante e que, por muito tempo, permaneceu como mistério para mim. Falo do <strong>self</strong> e do entendimento de como o interpretador ruby se comporta.</p>
+<div class="entry-content"><p>Ao iniciar com ruby me deparei com um conceito importante e que, por muito tempo, permaneceu como mistério para mim. Falo do <strong>self</strong> e do entendimento de como o interpretador ruby se comporta.</p>
 
 <p>É de grande importancia conseguirmos entender qual objeto esta em foco em cada linha de código que lemos ou seja, entender quem é o objeto em questão, entender quem é o <strong>self</strong>. Para ilustrar a explicação tome como base o código a seguir e tente adivinhar qual a saída da execução do mesmo.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -124,12 +121,12 @@
 </span><span class='line'><span class="n">me</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 </span><span class='line'>
 </span><span class='line'><span class="nb">p</span> <span class="nb">self</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>Ao executar esse código o resultado seria algo parecido com:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -143,12 +140,12 @@
 </span><span class='line'>  #&lt;Human:0x007fec31031068 @steps=4&gt;
 </span><span class='line'>  &quot;start run after 4 steps&quot;
 </span><span class='line'>  main
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>Se você entendeu a saída do exemplo provavelmente não precisa continuar a leitura desse post, mas para quem não conseguiu captar vamos a explicação. Nada melhor do que explicar linha a linha:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -236,22 +233,55 @@
 </span><span class='line'>
 </span><span class='line'><span class="nb">p</span> <span class="nb">self</span> <span class="c1"># =&gt; 6 - main</span>
 </span><span class='line'><span class="c1"># Novamente estamos fora da classe e o self passa a ser novamente o main</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>Espero que esse exemplo tenha esclarecido o misterioso <strong>self</strong> e até a próxima.</p>
 </div>
-  
-  
 
 
-    </article>
+  <footer>
+    <p class="meta">
+      
   
-  <div class="pagination">
+
+<span class="byline author vcard">Posted by <span class="fn">Denis Antoniazzi Tierno</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2014-08-28T23:34:00-03:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>28</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>11:34 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ruby/'>ruby</a>
+  
+</span>
+
+
+    </p>
     
-    <a href="/blog/archives">Blog Archives</a>
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://detierno.github.io/blog/2014/08/28/self-e-o-interpretador-ruby/" data-via="" data-counturl="http://detierno.github.io/blog/2014/08/28/self-e-o-interpretador-ruby/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
     
-  </div>
+    <p class="meta">
+      
+      
+    </p>
+  </footer>
+</article>
+
 </div>
 
     </div>
