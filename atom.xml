@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[coding life]]></title>
-  <link href="http://yoursite.com/atom.xml" rel="self"/>
-  <link href="http://yoursite.com/"/>
-  <updated>2014-08-29T15:53:58-03:00</updated>
-  <id>http://yoursite.com/</id>
+  <link href="http://detierno.github.io/atom.xml" rel="self"/>
+  <link href="http://detierno.github.io/"/>
+  <updated>2014-08-31T20:33:44-03:00</updated>
+  <id>http://detierno.github.io/</id>
   <author>
     <name><![CDATA[Denis Antoniazzi Tierno]]></name>
     
@@ -15,10 +15,13 @@
   
   <entry>
     <title type="html"><![CDATA[Self E O Interpretador Ruby]]></title>
-    <link href="http://yoursite.com/blog/2014/08/28/self-e-o-interpretador-ruby/"/>
+    <link href="http://detierno.github.io/blog/2014/08/28/self-e-o-interpretador-ruby/"/>
     <updated>2014-08-28T23:34:00-03:00</updated>
-    <id>http://yoursite.com/blog/2014/08/28/self-e-o-interpretador-ruby</id>
-    <content type="html"><![CDATA[<p>Ao iniciar com ruby me deparei com um conceito importante e que, por muito tempo, permaneceu como mistério para mim. Falo do <strong>self</strong> e do entendimento de como o interpretador ruby se comporta.</p>
+    <id>http://detierno.github.io/blog/2014/08/28/self-e-o-interpretador-ruby</id>
+    <content type="html"><![CDATA[<p>Como prometido ao @fnando pós Rubyconf 2014 estou iniciando um blog com
+algumas coisas que ando vendo ao longo do meu dia a dia com ruby.</p>
+
+<p>Ao iniciar com ruby me deparei com um conceito importante e que, por muito tempo, permaneceu como mistério para mim. Falo do <strong>self</strong> e do entendimento de como o interpretador ruby se comporta.</p>
 
 <p>É de grande importancia conseguirmos entender qual objeto esta em foco em cada linha de código que lemos ou seja, entender quem é o objeto em questão, entender quem é o <strong>self</strong>. Para ilustrar a explicação tome como base o código a seguir e tente adivinhar qual a saída da execução do mesmo.</p>
 
