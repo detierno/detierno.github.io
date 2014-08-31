@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby | coding life]]></title>
   <link href="http://detierno.github.io/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://detierno.github.io/"/>
-  <updated>2014-08-31T20:33:44-03:00</updated>
+  <updated>2014-08-31T20:35:59-03:00</updated>
   <id>http://detierno.github.io/</id>
   <author>
     <name><![CDATA[Denis Antoniazzi Tierno]]></name>
@@ -18,7 +18,7 @@
     <link href="http://detierno.github.io/blog/2014/08/28/self-e-o-interpretador-ruby/"/>
     <updated>2014-08-28T23:34:00-03:00</updated>
     <id>http://detierno.github.io/blog/2014/08/28/self-e-o-interpretador-ruby</id>
-    <content type="html"><![CDATA[<p>Como prometido ao @fnando pós Rubyconf 2014 estou iniciando um blog com
+    <content type="html"><![CDATA[<p>Como prometido ao <a href="https://twitter.com/fnando">@fnando</a> pós Rubyconf 2014 estou iniciando um blog com
 algumas coisas que ando vendo ao longo do meu dia a dia com ruby.</p>
 
 <p>Ao iniciar com ruby me deparei com um conceito importante e que, por muito tempo, permaneceu como mistério para mim. Falo do <strong>self</strong> e do entendimento de como o interpretador ruby se comporta.</p>
