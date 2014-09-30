@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Elasticsearch, | coding life]]></title>
   <link href="http://detierno.github.io/blog/categories/elasticsearch/atom.xml" rel="self"/>
   <link href="http://detierno.github.io/"/>
-  <updated>2014-09-30T09:10:51-03:00</updated>
+  <updated>2014-09-30T09:12:04-03:00</updated>
   <id>http://detierno.github.io/</id>
   <author>
     <name><![CDATA[Denis Antoniazzi Tierno]]></name>
@@ -129,7 +129,8 @@ bool: {
 </code></pre>
 
 <p>E voilà, busca funcionando, resultados corretos e performance
-satisfatória.</p>
+satisfatória. Não preciso dizer onde o é o momento no gráfico onde a app
+passa a usar o elasticsearch&hellip;</p>
 
 <p><img class="<a" src="href="https://raw.githubusercontent.com/detierno/detierno.github.io/master/images/search_performance.png">https://raw.githubusercontent.com/detierno/detierno.github.io/master/images/search_performance.png</a>"></p>
 
