@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Elasticsearch, | coding life]]></title>
+  <link href="http://detierno.github.io/blog/categories/elasticsearch/atom.xml" rel="self"/>
+  <link href="http://detierno.github.io/"/>
+  <updated>2014-09-30T09:08:14-03:00</updated>
+  <id>http://detierno.github.io/</id>
+  <author>
+    <name><![CDATA[Denis Antoniazzi Tierno]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Utilizando Elasticsearch No Rails]]></title>
+    <link href="http://detierno.github.io/blog/2014/09/30/utilizando-elasticsearch-no-rails/"/>
+    <updated>2014-09-30T08:16:16-03:00</updated>
+    <id>http://detierno.github.io/blog/2014/09/30/utilizando-elasticsearch-no-rails</id>
+    <content type="html"><![CDATA[<p>Recentemente me deparei com a necessidade de trocar o motor de buscas de
+uma loja virtual. Esta utilizava um &ldquo;bom&rdquo; e velho LIKE, mas dado o
+número de registros (cerca de 4 mil produtos) este vinha apresentando
+problemas de performance, e como este assunto era novo pra mim resolvi
+registrar alguns passos do processo.</p>
+
+<p>Em um primeiro teste resolvi utilizar o full text search nativo do
+postgresql, usando a gem <a href="https://github.com/Casecommons/pg_search">pg_search</a>. A implementação foi simples, bastando seguir
+o README e, apesar de uma melhora, não consegui grandes resultados. Digo
+isso pois era necessário resgatar dados de diversas associações, o que
+gerava um query ainda com muitos joins em muitos registros ao mesmo
+tempo.</p>
+
+<p>O próximo passo foi tentar diminuir o número de joins utilizando <a href="http://alexpotrykus.com/blog/2013/04/10/postgres-views-in-rails/">uma view de postgres</a> e realizando a busca nesta &ldquo;tabela&rdquo; para otimizar os joins.
+Novamente, uma melhora limitada e insatisfatória.</p>
+
+<p>O passo final seria implementar um servidor de buscas, mas evitava isso
+pela curva de aprendizado aliada a falta de tempo disponível neste
+projeto, mas dado a situação me vi forçado a deixar de postergar e
+partir para uma solução definitiva.</p>
+
+<p>Decidi por utilizar o <a href="http://www.elasticsearch.org/">Elasticsearch</a>,
+mas não vou entrar nos detalhes de configuração pois existem diversos
+tutoriais sobre como faze-lo. Para integração com o rails me deparei com
+a gem <a href="https://github.com/karmi/retire">Tire</a> a qual fornece uma DSL
+simples, mas, para minha surpresa, ela está deprecada em favor da gem
+<a href="https://github.com/elasticsearch/elasticsearch-rails">elasticsearch-rails</a>.</p>
+
+<p>E aqui algumas dúvidas surgiram pois apesar da similaridade com a gem
+tire eu não havia usado nenhuma e não achei grandes referências sobre
+esta nova então vou deixar algumas dicas:</p>
+
+<p>A gem fornece um método para configurar o seu índice e seus mapeamentos como:</p>
+
+<pre><code class="ruby">settings index: { number_of_shards: 1, number_of_replicas: 0} do
+  mapping do
+    indexes :name, type: :string
+  end
+end
+</code></pre>
+
+<p>Uma das coisas que precisei e não soube de primeira implementar foi um
+&ldquo;custom analyzer&rdquo; e aprendi que essa opção deve ser passada fora do
+bloco, como parâmetro no hash de settings:</p>
+
+<pre><code class="ruby">  custom_analyzer = {
+      analyzer: {
+        default: {
+          tokenizer: 'standard',
+          filter: ['standard', 'lowercase', 'asciifolding'],
+        }
+      }
+    }
+
+  settings index: { number_of_shards: 1, number_of_replicas: 0, analysis: custom_analyzer} do
+    mapping do
+      indexes :name, type: :string
+    end
+  end
+</code></pre>
+
+<p>Por final, deixo a dica em um ponto que demorei pra aprender. Em minha
+configuração do índice existia uma associação aninhada e meus
+mapeamentos apresentavam algo parecido com:</p>
+
+<pre><code class="ruby">settings index: { number_of_shards: 1, number_of_replicas: 0} do
+  mapping do
+    indexes :name, type: :string
+    indexes :categories, type: 'nested' do
+      indexes :name, type: 'string'
+    end
+  end
+end
+</code></pre>
+
+<p>E minha query de busca apresentava uma definição parecida com:</p>
+
+<pre><code class="ruby">bool: {
+  should: {
+    multi_match: {
+     fields: ['name^10', 'description'],
+     query: query,
+     operator: 'and',
+     fuzziness: 1
+    }
+  }
+}
+</code></pre>
+
+<p>E para minha surpresa não conseguia resultados, o máximo que conseguia
+eram resultados aproximados do campo description, sendo que o campo name
+estava sendo totalmente ignorado. Apenas após bater muito a cabeça
+consegui entender que isso se dava porque, apesar de aninhado, o campo
+name dentro de categories torna obrigatório forçar nomes de campos
+iguais. Assim minha nova query ficou:</p>
+
+<pre><code class="ruby"># obs.: elasticsearch index name: products
+
+bool: {
+  should: {
+    multi_match: {
+     fields: ['products.name^10', 'description'],
+     query: query,
+     operator: 'and',
+     fuzziness: 1
+    }
+  }
+}
+</code></pre>
+
+<p>E voilà, busca funcionando, resultados corretos e performance
+satisfatória.</p>
+
+<p><img class="<a" src="href="http://codinglife.com.br/images/app_performance.png">http://codinglife.com.br/images/app_performance.png</a>"></p>
+
+<p>Além disso ainda o cliente obteve benefícios como filtros e facets, mas
+isso fica para um próximo post.</p>
+]]></content>
+  </entry>
+  
+</feed>
